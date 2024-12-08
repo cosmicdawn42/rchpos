@@ -513,3 +513,117 @@ form button:hover {
 .menu-container {
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+
+/* bar chart for orders */
+.chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* view admins/users */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+/* profilepage.php */
+/* Base style for the profile container */
+.profile-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Aligning the profile fields */
+.profile-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-field label {
+    font-weight: bold;
+    width: 30%;
+    color: #333;
+}
+
+.profile-field p {
+    width: 65%;
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Button and action links */
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-actions a {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.profile-actions a:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: Styling for responsive layout */
+@media (max-width: 768px) {
+    .profile-container {
+        width: 95%;
+    }
+
+    .profile-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-field label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .profile-field p {
+        width: 100%;
+    }
+}

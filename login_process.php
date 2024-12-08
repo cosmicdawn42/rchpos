@@ -3,13 +3,21 @@
 session_start();
 
 // Database connection settings
+/*
 $servername = "localhost";
 $username = "root";        
 $password = "";            
-$dbname = "rch_db";       
+$dbname = "rch_db";
+*/
+// Remote DB
+$servername = "sql.freedb.tech";
+$username = "freedb_etheria2024";        
+$password = 'EXH$fvdNh78zv*J';            
+$dbname = "rch_db";
 
 // Connect to MySQL
-$conn = new mysqli($servername, $username, $password, $dbname);
+//$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli('sql.freedb.tech', 'freedb_etheria2024', 'EXH$fvdNh78zv*J', 'freedb_rch_db');
 
 // Check connection
 if ($conn->connect_error) {
@@ -32,13 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultAdmin->num_rows > 0) {
         $userAdmin = $resultAdmin->fetch_assoc();
         if ($inputPassword === $userAdmin['password']) {
-            // Set session username for admin
+            // Set session username and user type for admin
             $_SESSION['username'] = $userAdmin['username'];
+            $_SESSION['user_type'] = 'admin';  // Add this line to set user type
             // Redirect to admin dashboard
             header("Location: admin_dashboard.php");
             exit();
         } else {
-            // Display error as prompt and stay on index.php
+            // Display error and stay on index.php
             echo "<script>alert('Invalid username or password.'); window.location.href = 'index.php';</script>";
             exit();
         }
@@ -55,18 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultUser->num_rows > 0) {
         $user = $resultUser->fetch_assoc();
         if ($inputPassword === $user['password']) {
-            // Set session username for regular user
+            // Set session username and user type for regular user
             $_SESSION['username'] = $user['username'];
+            $_SESSION['user_type'] = 'user';  // Add this line to set user type
             // Redirect to main POS
             header("Location: mainpos.php");
             exit();
         } else {
-            // Display error as prompt and stay on index.php
+            // Display error and stay on index.php
             echo "<script>alert('Invalid username or password.'); window.location.href = 'index.php';</script>";
             exit();
         }
     } else {
-        // Display error as prompt and stay on index.php
+        // Display error and stay on index.php
         echo "<script>alert('Invalid username or password.'); window.location.href = 'index.php';</script>";
         exit();
     }

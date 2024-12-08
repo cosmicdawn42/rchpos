@@ -40,7 +40,9 @@ include 'navbar.php';
         <button id="cold-btn">Cold</button>
         <div id="product-buttons">
             <?php
-            $conn = new mysqli('localhost', 'root', '', 'rch_db');
+            //$conn = new mysqli('localhost', 'root', '', 'rch_db');
+            $conn = new mysqli('sql.freedb.tech', 'freedb_etheria2024', 'EXH$fvdNh78zv*J', 'freedb_rch_db');
+
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }

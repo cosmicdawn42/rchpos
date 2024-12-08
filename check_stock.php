@@ -1,5 +1,7 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'rch_db');
+//$conn = new mysqli('localhost', 'root', '', 'rch_db');
+$conn = new mysqli('sql.freedb.tech', 'freedb_etheria2024', 'EXH$fvdNh78zv*J', 'freedb_rch_db');
+
 $product_id = intval($_POST['product_id']);
 
 $query = "SELECT quantity FROM productstbl WHERE product_id = ?";

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2024 at 03:57 AM
+-- Generation Time: Dec 08, 2024 at 02:18 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `admintbl` (
 --
 
 INSERT INTO `admintbl` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `isActive`, `isAdmin`) VALUES
-(2, '', '', '', 'admin', 'admin123', 1, 1);
+(2, 'ad', 'minui', 'adminisrepeat@gmail.com', 'admin', 'admin123', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -81,18 +81,19 @@ CREATE TABLE `productstbl` (
 --
 
 INSERT INTO `productstbl` (`product_id`, `product_name`, `price_hot`, `price_cold`, `quantity`) VALUES
-(1, 'Americano', 60.00, 65.00, 100),
-(2, 'Almond Latte', 70.00, 75.00, 100),
+(1, 'Americano', 60.00, 65.00, 94),
+(2, 'Almond Latte', 70.00, 75.00, 97),
 (3, 'Caffe Latte', 70.00, 75.00, 100),
-(4, 'Caramel Latte', 75.00, 80.00, 100),
+(4, 'Caramel Latte', 75.00, 80.00, 99),
 (5, 'Cinnamon', 75.00, 80.00, 100),
 (6, 'Dark Mocha', 75.00, 80.00, 100),
 (7, 'English Toffee', 75.00, 80.00, 100),
 (8, 'Hazelnut Latte', 70.00, 75.00, 100),
-(9, 'Spanish Latte', 75.00, 80.00, 100),
+(9, 'Spanish Latte', 75.00, 80.00, 98),
 (10, 'Classic Chocolate', 70.00, 75.00, 100),
 (11, 'Milky Caramel', 75.00, 80.00, 100),
-(12, 'Matcha', 75.00, 80.00, 100);
+(12, 'Matcha', 75.00, 80.00, 100),
+(16, 'Caffe Mocha', 155.00, 160.00, 30);
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ CREATE TABLE `usertbl` (
 --
 
 INSERT INTO `usertbl` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `isActive`, `isAdmin`) VALUES
-(1, 'kyla', 'ocampo', 'kyla123@gmail.com', 'cashier', 'cashier123', 1, 0);
+(1, '', '', 'ky123@gmail.com', 'cashier', 'cashier123', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -165,13 +166,13 @@ ALTER TABLE `admintbl`
 -- AUTO_INCREMENT for table `orderstbl`
 --
 ALTER TABLE `orderstbl`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `productstbl`
 --
 ALTER TABLE `productstbl`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `usertbl`
