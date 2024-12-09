@@ -11,79 +11,78 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch total counts
-$totalAdminsQuery = "SELECT COUNT(*) AS total_admins FROM admintbl WHERE isActive = 1";
-$totalUsersQuery = "SELECT COUNT(*) AS total_users FROM usertbl WHERE isActive = 1";
-$totalProductsQuery = "SELECT COUNT(*) AS total_products FROM productstbl";
-$todaysOrdersQuery = "SELECT COUNT(*) AS todays_orders FROM orderstbl WHERE DATE(date_created) = CURDATE()";
-$totalOrdersQuery = "SELECT COUNT(*) AS total_orders FROM orderstbl";
+// Initialize counts
+$totalAdmins = $totalUsers = $totalProducts = $todaysOrders = $totalOrders = 0;
 
-$totalAdmins = $conn->query($totalAdminsQuery)->fetch_assoc()['total_admins'];
-$totalUsers = $conn->query($totalUsersQuery)->fetch_assoc()['total_users'];
-$totalProducts = $conn->query($totalProductsQuery)->fetch_assoc()['total_products'];
-$todaysOrders = $conn->query($todaysOrdersQuery)->fetch_assoc()['todays_orders'];
-$totalOrders = $conn->query($totalOrdersQuery)->fetch_assoc()['total_orders'];
-
-// Prepare data for bar chart
-$orderStats = [];
-$query = "SELECT DATE(date_created) AS order_date, COUNT(*) AS total_orders 
-          FROM orderstbl 
-          GROUP BY DATE(date_created)";
+// Fetch total Admin users
+$query = "SELECT COUNT(*) AS total FROM admintbl WHERE isAdmin = 1";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
-    $orderStats[] = $row;
+if ($row = $result->fetch_assoc()) {
+    $totalAdmins = $row['total'];
 }
 $stmt->close();
-$conn->close();
 
-// Convert data for JavaScript
-$orderDates = json_encode(array_column($orderStats, 'order_date'));
-$orderCounts = json_encode(array_column($orderStats, 'total_orders'));
+// Fetch total Users
+$query = "SELECT COUNT(*) AS total FROM usertbl WHERE isActive = 1";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $totalUsers = $row['total'];
+}
+$stmt->close();
+
+// Fetch total Products
+$query = "SELECT COUNT(*) AS total FROM productstbl";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $totalProducts = $row['total'];
+}
+$stmt->close();
+
+// Fetch today's order count
+$todaysDate = date('Y-m-d');
+$query = "SELECT COUNT(*) AS total FROM orderstbl WHERE DATE(date_created) = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $todaysDate);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $todaysOrders = $row['total'];
+}
+$stmt->close();
+
+// Fetch total order count
+$query = "SELECT COUNT(*) AS total FROM orderstbl";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $totalOrders = $row['total'];
+}
+$stmt->close();
+
+$conn->close();
 ?>
 
 <div class="dashboard-grid">
     <div class="db-content">
         <div class="prod-container">
-            <p class="heading">Admin Dashboard</p>
+            <p class="heading">Dashboard</p>
             <hr>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <p>Total Admins</p>
-                    <h3><?php echo $totalAdmins; ?></h3>
-                </div>
-                <div class="stat-item">
-                    <p>Total Users</p>
-                    <h3><?php echo $totalUsers; ?></h3>
-                </div>
-                <div class="stat-item">
-                    <p>Total Products</p>
-                    <h3><?php echo $totalProducts; ?></h3>
-                </div>
-                <div class="stat-item">
-                    <p>Today's Orders</p>
-                    <h3><?php echo $todaysOrders; ?></h3>
-                </div>
-                <div class="stat-item">
-                    <p>Total Orders</p>
-                    <h3><?php echo $totalOrders; ?></h3>
-                </div>
-            </div>
-            <hr>
-            <div class="chart-container">
-                <canvas id="ordersChart"></canvas>
+            <div class="dashboard-metrics">
+                <p>Total Admin Users: <strong><?php echo $totalAdmins; ?></strong></p>
+                <p>Total Users: <strong><?php echo $totalUsers; ?></strong></p>
+                <p>Total Products: <strong><?php echo $totalProducts; ?></strong></p>
+                <p>Today's Order Count: <strong><?php echo $todaysOrders; ?></strong></p>
+                <p>Total Order Count: <strong><?php echo $totalOrders; ?></strong></p>
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="chart.js"></script>
-<script>
-    // Pass PHP data to chart.js
-    const orderDates = <?php echo $orderDates; ?>;
-    const orderCounts = <?php echo $orderCounts; ?>;
-</script>
 
 <?php include 'footer.php'; ?>

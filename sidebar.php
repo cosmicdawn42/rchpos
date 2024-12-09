@@ -19,6 +19,13 @@
             <i class="fi fi-ss-apps"></i>
                 <a href="mainpos.php">POS</a>
             </li>
+
+            <li>
+            <i class="fi fi-ss-apps"></i>
+            <a href="orderhistory.php">Orders</a>
+            </li>
+
+
         </ul>
         <p>Accounts</p>
         <ul>
