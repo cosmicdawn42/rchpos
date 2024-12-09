@@ -4,8 +4,8 @@ include 'navbar.php';
 include 'sidebar.php';
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'rch_db');
-//$conn = new mysqli('sql.freedb.tech', 'freedb_etheria2024', 'EXH$fvdNh78zv*J', 'freedb_rch_db');
+//$conn = new mysqli('localhost', 'root', '', 'rch_db');
+$conn = new mysqli('sql.freedb.tech', 'freedb_etheria2024', 'EXH$fvdNh78zv*J', 'freedb_rch_db');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
