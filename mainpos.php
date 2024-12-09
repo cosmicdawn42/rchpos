@@ -150,8 +150,54 @@ include 'navbar.php';
 
         // Print Receipt
         document.getElementById("print-btn").addEventListener("click", () => {
-            alert("Printing receipt...");
-        });
+    const cash = parseFloat(cashInput.value) || 0;
+    const total = calculateTotal();
+
+    if (cash < total) {
+        alert("Cash must be greater than or equal to total!");
+        return;
+    }
+
+    const change = cash - total;
+
+    // Prepare order details as a JSON string
+    const orderDetails = Object.values(selectedProducts).map((prod) => ({
+        product_name: prod.name,
+        price: prod.price,
+        quantity: prod.qty,
+        total_price: prod.subtotal,
+    }));
+
+    $.ajax({
+        url: "save_order.php",
+        method: "POST",
+        data: {
+            orderDetails: JSON.stringify(orderDetails),
+            cash_given: cash,
+            change: change,
+        },
+        success: (response) => {
+            try {
+                const result = JSON.parse(response);
+                if (result.success) {
+                    alert("Order saved and receipt printed!");
+                    selectedProducts = {};
+                    updateTable();
+                    cashInput.value = "";
+                    changeEl.textContent = "0.00";
+                } else {
+                    alert("Failed to save order: " + result.message);
+                }
+            } catch (e) {
+                alert("Unexpected error: " + response);
+            }
+        },
+        error: () => {
+            alert("An error occurred while saving the order.");
+        },
+    });
+});
+
 
         // Enter Button
         document.getElementById("enter-btn").addEventListener("click", () => {

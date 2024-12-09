@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2024 at 02:18 PM
+-- Generation Time: Dec 09, 2024 at 02:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -59,8 +59,15 @@ CREATE TABLE `orderstbl` (
   `total_price` decimal(10,2) NOT NULL,
   `cash_given` decimal(10,2) NOT NULL,
   `change` decimal(10,2) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orderstbl`
+--
+
+INSERT INTO `orderstbl` (`order_id`, `product_name`, `price`, `quantity`, `total_price`, `cash_given`, `change`, `date_created`) VALUES
+(1, 'Americano (Hot)', 60.00, 1, 60.00, 70.00, 10.00, '2024-12-09 02:40:38');
 
 -- --------------------------------------------------------
 
@@ -81,7 +88,7 @@ CREATE TABLE `productstbl` (
 --
 
 INSERT INTO `productstbl` (`product_id`, `product_name`, `price_hot`, `price_cold`, `quantity`) VALUES
-(1, 'Americano', 60.00, 65.00, 94),
+(1, 'Americano', 60.00, 65.00, 88),
 (2, 'Almond Latte', 70.00, 75.00, 97),
 (3, 'Caffe Latte', 70.00, 75.00, 100),
 (4, 'Caramel Latte', 75.00, 80.00, 99),
@@ -166,7 +173,7 @@ ALTER TABLE `admintbl`
 -- AUTO_INCREMENT for table `orderstbl`
 --
 ALTER TABLE `orderstbl`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `productstbl`
