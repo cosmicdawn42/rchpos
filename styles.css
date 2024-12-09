@@ -399,7 +399,7 @@ form button:hover {
     padding: 12px;
     border: 1px solid #ddd; /* Cell borders */
     text-align: left;
-    vertical-align: middle; /* Align text to the middle of cells */
+    vertical-align: middle; /* Align text to the middle of cells */ 
 }
 
 .prod-container th {
@@ -439,7 +439,7 @@ form button:hover {
 
 .selectedprod-container, .menu-container {
     flex: 1;
-    margin-top: 100px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column; 
     height: 100vh;
@@ -512,15 +512,6 @@ form button:hover {
 
 .menu-container {
     border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-
-/* bar chart for orders */
-.chart-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
 /* view admins/users */

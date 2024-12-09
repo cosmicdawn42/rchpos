@@ -13,7 +13,7 @@ $dbname = "rch_db";
 $servername = "sql.freedb.tech";
 $username = "freedb_etheria2024";        
 $password = 'EXH$fvdNh78zv*J';            
-$dbname = "rch_db";
+$dbname = "freedb_rch_db";
 
 // Connect to MySQL
 //$conn = new mysqli($servername, $username, $password, $dbname);
